@@ -3,10 +3,10 @@ import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from "stream";
 
 interface AESInterface {
-    encrypt(path: string, alogrithm: string, password: string): Promise<void>;
-    encryptWithIv(path: string, alogrithm: string, password: string, iv: Uint8Array): Promise<void>;
-    decrypt(path: string, alogrithm: string, password: string): Promise<void>;
-    decryptWithIv(path: string, alogrithm: string, password: string, iv: Uint8Array): Promise<void>;
+    encrypt(path: string, algorithm: string, password: string): Promise<void>;
+    encryptWithIv(path: string, algorithm: string, password: string, iv: Uint8Array): Promise<void>;
+    decrypt(path: string, algorithm: string, password: string): Promise<void>;
+    decryptWithIv(path: string, algorithm: string, password: string, iv: Uint8Array): Promise<void>;
 };
 
 class AES implements AESInterface{
@@ -14,7 +14,7 @@ class AES implements AESInterface{
     private iv: Uint8Array | null = null;
 
 
-    encrypt = (path: string, alogrithm: string, password: string) => {
+    encrypt = (path: string, algorithm: string, password: string) => {
         return new Promise<void>((resolve, reject) => {
             if(!this.buffer) this.buffer = randomBytes(16);
             scrypt(password, this.buffer, 24, (err: Error | null, key: Buffer): void => {
@@ -22,7 +22,7 @@ class AES implements AESInterface{
                 randomFill(new Uint8Array(16), (err: Error | null, iv: Uint8Array) => {
                     if(err) reject(err);
                     if(!this.iv) this.iv = iv;
-                    const cipher = createCipheriv(alogrithm, key, iv);
+                    const cipher = createCipheriv(algorithm, key, iv);
 
                     const input = createReadStream(path);
                     const output = createWriteStream(`${path}.enc`);
@@ -37,13 +37,13 @@ class AES implements AESInterface{
     };
 
 
-    encryptWithIv = (path: string, alogrithm: string, password: string, iv: Uint8Array) => {
+    encryptWithIv = (path: string, algorithm: string, password: string, iv: Uint8Array) => {
         return new Promise<void>((resolve, reject) => {
             this.buffer = randomBytes(16);
             scrypt(password, this.buffer, 24, (err: Error | null, key: Buffer): void => {
                 if(err) reject(err);
                 this.iv = iv;
-                const cipher = createCipheriv(alogrithm, key, iv);
+                const cipher = createCipheriv(algorithm, key, iv);
 
                 const input = createReadStream(path);
                 const output = createWriteStream(`${path}.enc`);
@@ -57,13 +57,13 @@ class AES implements AESInterface{
     };
 
  
-    decrypt = (path: string, alogrithm: string, password: string) => {
+    decrypt = (path: string, algorithm: string, password: string) => {
         return new Promise<void>((resolve, reject) => {
-            scrypt(password, this.buffer, 24, (err: Error | null, key: Buffer): void => {
+            scrypt(password, this.buffer as Buffer, 24, (err: Error | null, key: Buffer): void => {
                 if(err) reject(err);
                 const input = createReadStream(path);
                 const output = createWriteStream("text.txt");
-                const decipher = createDecipheriv(alogrithm, key, this.iv);
+                const decipher = createDecipheriv(algorithm, key, this.iv);
 
                 pipeline(input, decipher, output, (err: NodeJS.ErrnoException | null) => {
                     if(err) reject(err);
@@ -74,13 +74,13 @@ class AES implements AESInterface{
     };
 
 
-    decryptWithIv = (path: string, alogrithm: string, password: string, iv: Uint8Array) => {
+    decryptWithIv = (path: string, algorithm: string, password: string, iv: Uint8Array) => {
         return new Promise<void>((resolve, reject) => {
-            scrypt(password, this.buffer, 24, (err: Error | null, key: Buffer): void => {
+            scrypt(password, this.buffer as Buffer, 24, (err: Error | null, key: Buffer): void => {
                 if(err) reject(err);
                 const input = createReadStream(path);
                 const output = createWriteStream("text.txt");
-                const decipher = createDecipheriv(alogrithm, key, iv);
+                const decipher = createDecipheriv(algorithm, key, iv);
 
                 pipeline(input, decipher, output, (err: NodeJS.ErrnoException | null) => {
                     if(err) reject(err);
