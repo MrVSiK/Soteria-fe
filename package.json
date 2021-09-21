@@ -1,0 +1,29 @@
+{
+  "name": "file-encrpytor",
+  "version": "1.0.0",
+  "description": "A file encryption package for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx ts-node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrVSiK/file-encrpytor.git"
+  },
+  "keywords": [
+    "Typescript",
+    "Encryption",
+    "Node",
+    "Crpyto"
+  ],
+  "author": "Srinivas Varanasi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrVSiK/file-encrpytor/issues"
+  },
+  "homepage": "https://github.com/MrVSiK/file-encrpytor#readme",
+  "devDependencies": {
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}
