@@ -4,7 +4,8 @@
   "description": "A file encryption package for node",
   "main": "index.js",
   "scripts": {
-    "test": "npx ts-node index"
+    "test": "mocha",
+    "dev": "ts-node index.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
   },
   "homepage": "https://github.com/MrVSiK/file-encrpytor#readme",
   "devDependencies": {
+    "@types/mocha": "^9.0.0",
+    "mocha": "^9.1.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   }
