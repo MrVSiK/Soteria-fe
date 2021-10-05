@@ -1,6 +1,4 @@
-import File from "./src/files/index";
+import fe from "./src/index";
 
 
-export default {
-    File
-}
+export default fe;
