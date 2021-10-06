@@ -89,7 +89,7 @@ const encryptSync = (path: string, password: string, options?: Options) => {
         const keylen = options?.keylen ? options.keylen : 24;
         const algorithm = options?.algorithm ? options.algorithm : 'aes-192-cbc';
         const length = options?.length ? options.length : 16;
-        const iv = options?.iv ? options.iv : randomFillSync(new Uint32Array(length));
+        const iv = options?.iv ? options.iv : randomFillSync(new Uint8Array(length));
         
         const key = scryptSync(password, salt, keylen);
         const cipher = createCipheriv(algorithm, key, iv);
