@@ -148,4 +148,15 @@ describe('Sync encryption with different arguments', () => {
             bytes: obj.salt.length
         });
     });
+
+    it('Clean up', () => {
+        setTimeout(() => {
+            const arr = ['total.enc.txt','test.enc.txt','happy.enc.txt'];
+            for(let i in arr){
+                fs.rm(`${__dirname}/${arr[i]}`, (err) => {
+                    if(err) assert.fail(err);
+                })
+            }
+        }, 1000);
+    })
 });

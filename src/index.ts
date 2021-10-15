@@ -12,7 +12,7 @@ import { pipeline } from 'stream';
 import type { BinaryLike } from '../types/index';
 import { dirname, extname, basename, join } from 'path';
 
-type Options = {
+type EncryptionOptions = {
     bytes?: number,
     algorithm?: string,
     iv?: BinaryLike,
@@ -22,12 +22,20 @@ type Options = {
     outputPath?: string
 }
 
+type DecryptionOptions = {
+    algorithm?: string,
+    iv: BinaryLike,
+    salt: BinaryLike | Buffer,
+    keylen?: number,
+    outputPath?: string
+}
+
 type Object = {
     salt: BinaryLike | Buffer,
     iv: BinaryLike
 }
 
-const encrypt = (path: string, password: string, options?: Options) => {
+const encrypt = (path: string, password: string, options?: EncryptionOptions) => {
     return new Promise<Object>((resolve, reject) => {
         const salt = options?.salt ? options.salt : randomBytes(options?.bytes ? options.bytes : 16);
         const keylen = options?.keylen ? options.keylen : 24;
@@ -59,12 +67,12 @@ const encrypt = (path: string, password: string, options?: Options) => {
 };
 
 
-const decrypt = (path: string, password: string, options?: Options) => {
+const decrypt = (path: string, password: string, options: DecryptionOptions) => {
     return new Promise<void>((resolve, reject) => {
-        const salt = options?.salt ? options.salt : undefined;
-        const keylen = options?.keylen ? options.keylen : 24;
-        const algorithm = options?.algorithm ? options.algorithm : 'aes-192-cbc';
-        const iv = options?.iv ? options.iv : undefined;
+        const salt = options.salt ? options.salt : undefined;
+        const keylen = options.keylen ? options.keylen : 24;
+        const algorithm = options.algorithm ? options.algorithm : 'aes-192-cbc';
+        const iv = options.iv ? options.iv : undefined;
         scrypt(password, salt as BinaryLike, keylen, (err, key) => {
             if(err) reject(err);
             const cipher = createDecipheriv(algorithm, key, iv as BinaryLike);
@@ -83,7 +91,7 @@ const decrypt = (path: string, password: string, options?: Options) => {
     })
 };
 
-const encryptSync = (path: string, password: string, options?: Options) => {
+const encryptSync = (path: string, password: string, options?: EncryptionOptions) => {
     try{
         const salt = options?.salt ? options.salt : randomBytes(options?.bytes ? options.bytes : 16);
         const keylen = options?.keylen ? options.keylen : 24;
@@ -114,7 +122,7 @@ const encryptSync = (path: string, password: string, options?: Options) => {
     }
 };
 
-const decryptSync = (path: string, password: string, options?: Options) => {
+const decryptSync = (path: string, password: string, options: DecryptionOptions) => {
     try{
         const salt = options?.salt ? options.salt : undefined;
         const keylen = options?.keylen ? options.keylen : 24;
