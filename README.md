@@ -1,37 +1,37 @@
-# file-encryptor
+# soteria-fe
 An easy to use file encryption package for nodejs.
 
 ## Installation
 ```bash 
-npm i file-encryptor 
+npm i soteria-fe 
 ```
 
 ## Quick Start
 ```js
-const fe = require("file-encryptor");
+const fe = require("soteria-fe");
 ```
 ## Async Encryption
 **encrypt(file-path, password, options)** returns a **promise** which resolves with an object containing the salt and iv used to encrypt the file.
 ```js
-const fe = require("file-encryptor");
+const fe = require("soteria-fe");
 fe.encrypt(<file path>, <password>, options).then(({ salt, iv }) => { // Code goes here});
 ```
 ## Sync Encryption
 **encryptSync(file-path, password, options)** returns an object containing the salt and iv used to encrypt the file.
 ```js
-const fe = require("file-encryptor");
+const fe = require("soteria-fe");
 const { salt, iv } = fe.encryptSync(<file path>, <password>, options);
 ```
 ## Async Decryption
 **decrypt(file-path, password, options)** returns a **promise**.
 ```js
-const fe = require("file-encryptor");
+const fe = require("soteria-fe");
 fe.decrypt(<file path>, <password>, options).then(() => { // Code goes here});
 ```
 ## Sync Decryption
 **decryptSync(file-path, password, options)** returns nothing.
 ```js
-const fe = require("file-encryptor");
+const fe = require("soteria-fe");
 fe.decryptSync(<file path>, <password>, options);
 ```
 

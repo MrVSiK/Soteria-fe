@@ -1,5 +1,5 @@
 {
-  "name": "file-encryptor",
+  "name": "soteria-fe",
   "version": "1.0.0",
   "description": "A file encryption package for node",
   "main": "lib/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MrVSiK/file-encrpytor.git"
+    "url": "git+https://github.com/MrVSiK/Soteria-fe.git"
   },
   "keywords": [
     "Typescript",
@@ -21,9 +21,9 @@
   "author": "Srinivas Varanasi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MrVSiK/file-encrpytor/issues"
+    "url": "https://github.com/MrVSiK/Soteria-fe/issues"
   },
-  "homepage": "https://github.com/MrVSiK/file-encrpytor#readme",
+  "homepage": "https://github.com/MrVSiK/Soteria-fe#readme",
   "devDependencies": {
     "@types/mocha": "^9.0.0",
     "mocha": "^9.1.2",
