@@ -7,3 +7,6 @@ npm i file-encryptor
 ```
 
 ## Quick Start
+```js
+const fe = require("file-encryptor");
+```
