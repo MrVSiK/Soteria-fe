@@ -1,6 +1,6 @@
 {
   "name": "soteria-fe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A file encryption package for node",
   "main": "lib/index.js",
   "types": "lib",
