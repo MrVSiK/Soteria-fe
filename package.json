@@ -1,5 +1,5 @@
 {
-  "name": "file-encrpytor",
+  "name": "file-encryptor",
   "version": "1.0.0",
   "description": "A file encryption package for node",
   "main": "lib/index.js",
