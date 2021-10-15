@@ -1,5 +1,5 @@
 import assert from "assert";
-import fe from "../index";
+import fe from "../src/index";
 import fs from "fs";
 import { randomFillSync, randomBytes } from "crypto";
 
