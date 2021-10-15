@@ -29,8 +29,5 @@
     "mocha": "^9.1.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
-  },
-  "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
   }
 }
