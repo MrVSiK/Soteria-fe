@@ -9,7 +9,6 @@ import {
 } from 'crypto';
 import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from 'stream';
-import type { BinaryLike } from '../types/index';
 import { dirname, extname, basename, join } from 'path';
 
 type EncryptionOptions = {
@@ -34,6 +33,8 @@ type Object = {
     salt: BinaryLike | Buffer,
     iv: BinaryLike
 }
+
+export type BinaryLike = Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Int8Array | Int16Array | Int32Array | BigUint64Array | BigInt64Array | Float32Array | Float64Array | string;
 
 const encrypt = (path: string, password: string, options?: EncryptionOptions) => {
     return new Promise<Object>((resolve, reject) => {

@@ -2,10 +2,11 @@
   "name": "file-encrpytor",
   "version": "1.0.0",
   "description": "A file encryption package for node",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib",
   "scripts": {
     "test": "mocha",
-    "dev": "ts-node index.ts"
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,8 @@
     "mocha": "^9.1.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
   }
 }
